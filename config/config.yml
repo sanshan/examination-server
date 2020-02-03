@@ -1,0 +1,2 @@
+db:
+  url: 'mongodb://examination-db:yXB7LqhMfi8qFfAH@sandboxcluster-imdax.gcp.mongodb.net/test?retryWrites=true&w=majority'
