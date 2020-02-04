@@ -1,15 +1,16 @@
 const mongoose = require('mongoose')
 const config = require('config')
+const logger = require('../logger/logger')
 
 const DEV_URI = config.get('database.providers.mongodb.url')
 
 mongoose.connection.on('connected', () => {
-    console.log('Соединение установлено')
+    logger.info('Соединение с БД установлено')
 })
 
 mongoose.connect(DEV_URI, {
     useUnifiedTopology: true,
     useNewUrlParser: true,
-}).catch(err => console.error('Ошибка при подключении к базе данных', err))
+}).catch(err => logger.error('Ошибка при подключении к базе данных', {additional: err}))
 
 module.exports = mongoose

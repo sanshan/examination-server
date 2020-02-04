@@ -21,7 +21,6 @@ const MenuType = new GraphQLObjectType({
         items: {
             type: new GraphQLList(MenuItemType),
             resolve(parent, args) {
-                console.log('test')
                 return MenuItems.find({menuId: parent._id})
             }
         }
@@ -46,7 +45,6 @@ const Query = new GraphQLObjectType({
             type: MenuType,
             args: {_id: {type: GraphQLID}},
             resolve(parent, args) {
-                console.log('test2')
                 return Menus.findById(args._id)
             }
         },

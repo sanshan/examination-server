@@ -4,6 +4,7 @@ const Schema = mongoose.Schema
 
 const menuSchema = new Schema(
     {
+        _id: mongoose.ObjectId,
         title: String,
         description: String
     },
