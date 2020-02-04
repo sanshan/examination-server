@@ -1,31 +1,18 @@
-const {app, PORT} = require('./express/express')
-const { db } = require('./config/config')
+const app = require('./express/express')
+const config = require('config')
+const graphqlHTTP = require('express-graphql')
+const schema = require('./graphql/schema/schema')
 
-console.log(db)
+app.use('/graphql', graphqlHTTP({
+    schema,
+    graphiql: true
+}))
 
-//
-// const mongooseClientOptions = {
-//     useUnifiedTopology: true,
-//     useNewUrlParser: true
-// }
-//
-// const mongo = new MongoClient(mongoDBConnectionUrl, mongooseClientOptions)
-//
-//
-// mongo.connect(() => {
-//     console.log("Connected correctly to server")
-//
-//     mongo.close()
-// })
-//
-//
-// app.use('/graphql', graphqlHTTP({
-//     schema,
-//     graphiql: true
-// }))
+const PORT = config.get('express.port')
 
 app.listen(PORT, err => {
     err ? console.error(err) : console.log(`Server started on port ${PORT}`)
 })
+
 
 

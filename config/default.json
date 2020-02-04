@@ -1,0 +1,13 @@
+{
+  "database": {
+    "provider": "mongodb",
+    "providers": {
+      "mongodb": {
+        "url": "mongodb+srv://examination-db:yXB7LqhMfi8qFfAH@sandboxcluster-imdax.gcp.mongodb.net/examination?retryWrites=true&w=majority"
+      }
+    }
+  },
+  "express": {
+    "port": 42001
+  }
+}

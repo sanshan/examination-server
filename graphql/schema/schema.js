@@ -1,7 +1,7 @@
 const graphql = require('graphql')
 
-const Menus = require('models/menu.model')
-const MenuItems = require('models/menu-item.model')
+const Menus = require('../models/menu.model')
+const MenuItems = require('../models/menu-item.model')
 
 const {
     GraphQLObjectType,
@@ -53,10 +53,6 @@ const Query = new GraphQLObjectType({
         menus: {
             type: new GraphQLList(MenuType),
             resolve(parent, args) {
-                Menus.find({}, function(err, menus){
-                    console.log('Found Menus :', menus);
-                })
-
                 return Menus.find({})
             }
         }
