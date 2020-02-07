@@ -13,7 +13,8 @@ const {
 } = graphql
 
 const MenuType = new GraphQLObjectType({
-    name: 'Menu',
+    name: 'MenuType',
+    description: 'Тип данных для меню приложения',
     fields: () => ({
         _id: {type: GraphQLID},
         title: {type: GraphQLString},
@@ -29,6 +30,7 @@ const MenuType = new GraphQLObjectType({
 
 const MenuItemType = new GraphQLObjectType({
     name: 'MenuItemType',
+    description: 'Тип данных для пунктов меню приложения',
     fields: () => ({
         _id: {type: GraphQLID},
         title: {type: GraphQLString},
@@ -38,25 +40,35 @@ const MenuItemType = new GraphQLObjectType({
     })
 })
 
-const Query = new GraphQLObjectType({
-    name: 'Query',
+const RootQuery = new GraphQLObjectType({
+    name: 'RootQuery',
+    description: 'Корневой запрос',
     fields: {
-        menu: {
+        getMenuById: {
+            description: 'Получить одно меню по ID',
             type: MenuType,
             args: {_id: {type: GraphQLID}},
             resolve(parent, args) {
                 return Menus.findById(args._id)
             }
         },
-        menus: {
+        getAllMenus: {
+            description: 'Получить все меню',
             type: new GraphQLList(MenuType),
             resolve(parent, args) {
                 return Menus.find({})
+            }
+        },
+        getAllMenuItems: {
+            description: 'Получить все пункты меню',
+            type: new GraphQLList(MenuItemType),
+            resolve(parent, args) {
+                return MenuItems.find({})
             }
         }
     }
 })
 
 module.exports = new GraphQLSchema({
-    query: Query
+    query: RootQuery
 })
